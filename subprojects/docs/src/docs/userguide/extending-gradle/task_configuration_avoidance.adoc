@@ -370,7 +370,7 @@ It is highly recommended to have cross-version test coverage using <<test_kit.ad
 | Description
 
 | Instead of: `task myTask(type: MyTask) {}`
-.2+| There is not a shorthand Groovy DSL for using the new API.
+.2+| There are no shorthand Groovy DSL for using the new API.
 | Use: `tasks.register("myTask", MyTask) {}`
 
 | Instead of: link:{javadocPath}/org/gradle/api/tasks/TaskContainer.html#create-java.util.Map-[TaskContainer.create(java.util.Map)]

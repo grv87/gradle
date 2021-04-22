@@ -22,7 +22,7 @@ import org.gradle.api.file.SourceDirectorySet;
 import javax.annotation.Nullable;
 
 /**
- * A {@code GroovySourceSetConvention} defines the properties and methods added to a {@link SourceSet} by the {@link
+ * A {@code GroovySourceSet} defines the properties and methods added to a {@link SourceSet} by the {@link
  * org.gradle.api.plugins.GroovyPlugin}.
  */
 public interface GroovySourceSet {

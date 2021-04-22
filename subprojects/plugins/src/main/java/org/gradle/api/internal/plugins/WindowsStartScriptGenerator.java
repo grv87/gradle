@@ -23,7 +23,7 @@ public class WindowsStartScriptGenerator extends DefaultTemplateBasedStartScript
         super(
                 TextUtil.getWindowsLineSeparator(),
                 StartScriptTemplateBindingFactory.windows(),
-                utf8ClassPathResource(UnixStartScriptGenerator.class, "windowsStartScript.txt")
+                utf8ClassPathResource(WindowsStartScriptGenerator.class, "windowsStartScript.txt")
         );
     }
 }
