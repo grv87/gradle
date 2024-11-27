@@ -16,6 +16,8 @@
 
 package org.gradle.internal.resource.transport.aws.s3;
 
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.RegionUtils;
 import com.google.common.base.Optional;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
@@ -33,12 +35,14 @@ import static java.lang.System.getProperty;
 
 public class S3ConnectionProperties {
     public static final String S3_ENDPOINT_PROPERTY = "org.gradle.s3.endpoint";
+    public static final String S3_REGION_PROPERTY = "org.gradle.s3.region";
     //The maximum number of times to retry a request when S3 responds with a http 5xx error
     public static final String S3_MAX_ERROR_RETRY = "org.gradle.s3.maxErrorRetry";
     private static final Set<String> SUPPORTED_SCHEMES = Sets.newHashSet("HTTP", "HTTPS");
     private static final long DEFAULT_PART_SIZE = 50 * 1024 * 1024;
 
     private final Optional<URI> endpoint;
+    private final Optional<Region> region;
     private final HttpProxySettings proxySettings;
     private final HttpProxySettings secureProxySettings;
     private final Optional<Integer> maxErrorRetryCount;
@@ -46,14 +50,16 @@ public class S3ConnectionProperties {
 
     public S3ConnectionProperties() {
         endpoint = configureEndpoint(getProperty(S3_ENDPOINT_PROPERTY));
+        region = Optional.fromNullable(RegionUtils.getRegion(getProperty(S3_REGION_PROPERTY)));
         proxySettings = new JavaSystemPropertiesHttpProxySettings();
         secureProxySettings = new JavaSystemPropertiesSecureHttpProxySettings();
         maxErrorRetryCount = configureErrorRetryCount(getProperty(S3_MAX_ERROR_RETRY));
         partSize = DEFAULT_PART_SIZE;
     }
 
-    public S3ConnectionProperties(HttpProxySettings proxySettings, HttpProxySettings secureProxySettings, URI endpoint, Integer maxErrorRetryCount) {
+    public S3ConnectionProperties(HttpProxySettings proxySettings, HttpProxySettings secureProxySettings, URI endpoint, Region region, Integer maxErrorRetryCount) {
         this.endpoint = Optional.fromNullable(endpoint);
+        this.region = Optional.fromNullable(region);
         this.proxySettings = proxySettings;
         this.secureProxySettings = secureProxySettings;
         this.maxErrorRetryCount = Optional.fromNullable(maxErrorRetryCount);
@@ -77,6 +83,10 @@ public class S3ConnectionProperties {
 
     public Optional<URI> getEndpoint() {
         return endpoint;
+    }
+
+    public Optional<Region> getRegion() {
+        return region;
     }
 
     public Optional<HttpProxySettings.HttpProxy> getProxy() {

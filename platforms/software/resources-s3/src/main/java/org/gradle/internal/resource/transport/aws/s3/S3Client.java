@@ -246,13 +246,15 @@ public class S3Client {
 
     private void configureClient(S3RegionalResource s3RegionalResource) {
         Optional<URI> endpoint = s3ConnectionProperties.getEndpoint();
+        Optional<Region> region;
         if (endpoint.isPresent()) {
             amazonS3Client.setEndpoint(endpoint.get().toString());
+            region = s3ConnectionProperties.getRegion();
         } else {
-            Optional<Region> region = s3RegionalResource.getRegion();
-            if (region.isPresent()) {
-                amazonS3Client.setRegion(region.get());
-            }
+            region = s3RegionalResource.getRegion();
+        }
+        if (region.isPresent()) {
+            amazonS3Client.setRegion(region.get());
         }
     }
 }
