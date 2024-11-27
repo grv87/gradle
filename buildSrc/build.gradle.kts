@@ -69,7 +69,7 @@ subprojects {
             enableStricterValidation = true
         }
 
-        apply(from = "../../../gradle/shared-with-buildSrc/code-quality-configuration.gradle.kts")
+        apply(from = "../../code-quality-configuration.gradle.kts")
     }
     apply(plugin = "eclipse")
 }
