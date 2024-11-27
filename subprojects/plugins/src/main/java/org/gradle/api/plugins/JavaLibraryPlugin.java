@@ -58,7 +58,7 @@ public class JavaLibraryPlugin implements Plugin<Project> {
     }
 
     private void addApiToMainSourceSet(Project project, JavaPluginConvention convention, ConfigurationContainer configurations) {
-        SourceSet sourceSet = convention.getSourceSets().getByName("main");
+        SourceSet sourceSet = convention.getSourceSets().getByName(SourceSet.MAIN_SOURCE_SET_NAME);
 
         Configuration apiConfiguration = configurations.maybeCreate(sourceSet.getApiConfigurationName());
         apiConfiguration.setVisible(false);
