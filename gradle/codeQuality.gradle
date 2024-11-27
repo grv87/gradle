@@ -30,7 +30,8 @@ tasks.withType(CodeNarc) {
 }
 
 dependencies {
-    codenarc 'org.codenarc:CodeNarc:1.0'
+    codenarc 'org.codenarc:CodeNarc:1.1'
+    // codenarc 'xerces:xercesImpl:2..0'
     components {
         withModule('org.codenarc:CodeNarc') {
             allVariants {
